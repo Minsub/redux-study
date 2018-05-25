@@ -2,27 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+import ContactPage from './components/redux/ContactPage';
 
-import { createStore } from 'redux';
-import reducers from './reducers';
-// import * as actions from './actions';
+const rootReducer = combineReducers({
+  form: formReducer
+})
 
-const store = createStore(reducers);
-
-// const unsubscribe = store.subscribe(() => console.log(store.getState()));
-// store.dispatch(actions.increment());
-// store.dispatch(actions.increment());
-// store.dispatch(actions.decrement());
-// store.dispatch(actions.setColor([200,200,200]));
-
-// unsubscribe();
-// store.dispatch(actions.setColor([210,210,210]));
+const store = createStore(rootReducer)
 
 
 ReactDOM.render(
-	<Provider store={store}>
-		<App/>
-	</Provider>,
-	document.getElementById('root')
+    <Provider store={store}>
+      <ContactPage />
+    </Provider>,
+    document.getElementById('root')
 );
-
